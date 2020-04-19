@@ -1,0 +1,10 @@
+Source	Target
+A	x
+B	x
+C	x
+D	y
+A	y
+B	y
+K	p
+L	A
+M	K
