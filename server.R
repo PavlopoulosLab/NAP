@@ -716,7 +716,7 @@ loadNetworkFromFile <- function() {
     
     stat_dataset <- function(dataset, datasetName) {
         res <- tryCatch({
-            columns <- c("Statistic", paste0("Value for ", datasetName))
+            columns <- c("Statistics", paste0("Value for ", datasetName))
             if (is.null(dataset)) {
                 dataset <- EmptyDataset(columns)
             } else {

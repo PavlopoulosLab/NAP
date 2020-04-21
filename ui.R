@@ -56,7 +56,7 @@ fixedPage(
             "Welcome",
             icon = icon("fas fa-door-open", lib = "font-awesome"),
             
-            h2("Welcome to the Network Analysis Provider"),
+            h2("Welcome to the Network Analysis Profiler"),
             strong(
                 "a mediator for shaking hands between graph theory and systems biology."
             ),
@@ -125,7 +125,7 @@ fixedPage(
                         uiOutput("uiStoredGraphsOutputSelectUpload"),
                         tabsetPanel(
                             tabPanel(
-                                "Table View of Dataset(s)",
+                                "Table View",
                                 icon = icon("table"),
                                 eval(ui_dataTable_panel('datasettab1'))
                             ),
@@ -252,7 +252,7 @@ fixedPage(
                         condition = "input.statisticsMethodsMainTabsetPanel == 'plotView'",
                         uiOutput("uiStoredGraphsOutputMultipleSelectTopolopgy")
                     ),
-                    helpText("Select the statistics you want in the analysis."),
+                    # helpText("Select the statistics you want in the analysis."),
                     checkboxGroupInput(
                         "statistics",
                         "The statistics:",
@@ -272,7 +272,7 @@ fixedPage(
                         tabsetPanel(
                             id = "statisticsMethodsMainTabsetPanel",
                             tabPanel(
-                                "Statistic",
+                                "Statistics",
                                 value = "tableView",
                                 icon = icon("table"),
                                 eval(ui_dataTable_panel("statres", FALSE))
@@ -385,7 +385,7 @@ fixedPage(
                         tabsetPanel(
                             id = "rankingMethodsMainTabsetPanel",
                             tabPanel(
-                                "Table View of Dataset(s)",
+                                "Table View",
                                 value = "tableView",
                                 icon = icon("table"),
                                 eval(ui_dataTable_panel("rankeddatasettab1"))
@@ -609,38 +609,40 @@ NAP accepts as input, an obligatory, tab-delimited file, containing all network 
                   helpText("In this Tab users can explore various topological features of each network. Shortly, these are: "),
                   helpText(tags$ul(
                     tags$li("Number of Nodes: 
-                    Shows the number of noded in the network. There is no limitation on the nuber of nodes."),
+                    Shows the number of nodes in the network."),
+                    tags$li("Number of Edges: 
+                    Shows the number of connections in the network."),
                     tags$li("Diameter: 
-                            Shows the length of the longest geodesic.The diameter is calculated by using a breadth-first search like method.The graph-theoretic or geodesic distance between two points is defined as the length of the shortest path between them."),
+                            Shows the length of the longest geodesic. The diameter is calculated by using a breadth-first search like method. The graph-theoretic or geodesic distance between two points is defined as the length of the shortest path between them."),
                     tags$li("Radius: 
                             The eccentricity of a vertex is its shortest path distance from the farthest other node in the graph. The smallest eccentricity in a graph is called its radius. The eccentricity of a vertex is calculated by measuring the shortest distance from (or to) the vertex, to (or from) all vertices in the graph, and taking the maximum."),
                     tags$li("Density:
-                            The density of a graph is the ratio of the number of edges and the number of possible edges."),
-                    tags$li("Average path length: 
+                            The density of a graph is the ratio of the number of edges divided by the number of possible edges."),
+                    tags$li("Average Path Length: 
                             The average number of steps needed to go from a node to any other."),
                     tags$li("Clustering Coefficient: 
                             A metric to show if the network has the tendency to form clusters."),
                     tags$li("Modularity:
                             This function calculates how modular is a given division of a graph into subgraphs."),
-                    tags$li("Number of self loops: 
+                    tags$li("Number of Self Loops: 
                             How many nodes are connected to themselves."),
                     tags$li("Average Eccentricity: 
-                            The eccentricity of a vertex is its shortest path distance from the farthest other node in the graph."),
+                            The eccentricity of a vertex is its shortest path distance from the farthest node in the graph."),
                     tags$li("Average Eigenvector Centrality:
                             It is a measure of the influence of a node in a network."),
-                    tags$li("Assortativity degree:
+                    tags$li("Assortativity Degree:
                             The assortativity coefficient is positive is similar vertices (based on some external property) tend to connect to each, and negative otherwise."),
-                    tags$li("Is directed acyclic graph:
-                            It returns True (1) or False (0)."),
-                    tags$li("Average number of Neighbors:
+                    tags$li("Directed Acyclic Graph:
+                            It returns True (1), if there are circular paths in the graph or False (0), elsewhere."),
+                    tags$li("Average Number of Neighbors:
                             How many neighbors each node of the network has on average."),
-                    tags$li("Centralization betweenness: 
+                    tags$li("Centralization Betweenness: 
                             It is an indicator of a node's centrality in a network. It is equal to the number of shortest paths from all vertices to all others that pass through that node.Betweenness centrality quantifies the number of times a node acts as a bridge along the shortest path between two other nodes."),
-                    tags$li("Centralization closeness: 
+                    tags$li("Centralization Closeness: 
                             It measures the speed with which randomly walking messages reach a vertex from elsewhere in the graph."),
-                    tags$li("Centralization degree: 
+                    tags$li("Centralization Degree: 
                             It is defined as the number of links incident upon a node."),
-                    tags$li("Graph mincut: 
+                    tags$li("Graph Mincut: 
                             Calculates the minimum st-cut between two vertices in a graph. The minimum st-cut between source and target is the minimum total weight of edges needed to remove to eliminate all paths from source to target."),
                     tags$li("Motifs-3:
                             Searches a graph for motifs of size 3."),
@@ -720,8 +722,23 @@ NAP accepts as input, an obligatory, tab-delimited file, containing all network 
             ),
             br(),
             helpText("Please cite:"),
-            strong("NAP: The Network Analysis Profiler, a Web Tool for Easier Topological Analysis and Comparison of Medium-Scale Biological Networks."),
-            helpText("PMID:28705239, PMCID:PMC5513407, DOI:10.1186/s13104-017-2607-8")
+            tags$a(href="https://pubmed.ncbi.nlm.nih.gov/28705239/", "NAP: The Network Analysis Profiler, a Web Tool for Easier Topological Analysis and Comparison of Medium-Scale Biological Networks."),
+            helpText("PMID:28705239"),
+            br(),
+            helpText("Related literature:"),
+            tags$a(href="https://pubmed.ncbi.nlm.nih.gov/32083072/", "A Guide to Conquer the Biological Network Era Using Graph Theory"),
+            helpText("PMID:32083072"),
+            br(),
+            helpText("Related software:"),
+            tags$ul(
+              tags$li(tags$a(href="http://bib.fleming.gr:3838/NORMA/", "NORMA-The network makeup artist: a web tool for network annotation visualization")
+              )),
+            br(),
+            tags$ul(
+              tags$li(tags$a(href="https://cytoscape.org/", "Cytoscape"))),
+            br(),
+            br()
+            
         )
     )
 )
