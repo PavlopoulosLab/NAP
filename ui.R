@@ -173,6 +173,8 @@ fixedPage(
                                                  # div(
                                                  #   div(
                                                  visNetworkOutput(outputId = "plot_layout", width = 700, height = 700),
+                                                 
+                                                 
                                                  # class = 'box-panel-padding'
                                                  #   ),
                                                  # class = 'box-panel'

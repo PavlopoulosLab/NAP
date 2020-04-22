@@ -21,6 +21,8 @@ read_data <- function(datapath, type = c("txt"), header = T, sep = "\t", quote =
 convert_to_igraph <- function(dataset1) ({
     directed_tf <- FALSE
     weighted_tf <- FALSE
+    # colnames(dataset1) <- c("Source", "Target", "weight") #new
+    # print(dataset1)
     if (attr(dataset1, "directed")) {
         directed_tf <- attr(dataset1, "directed")
     }
@@ -1121,6 +1123,8 @@ loadNetworkFromFile <- function() {
     
     output$plot_layout <- renderVisNetwork({
       igraph <- fetchFirstSelectedStoredIgraph()
+      dataset <- fetchFirstSelectedStoredDataset()
+      
       set.seed(123)
       
       if (is.null(igraph)) {
@@ -1136,12 +1140,12 @@ loadNetworkFromFile <- function() {
                                                grid = "layout.grid", 
                                                sphere = "layout.sphere", 
                                                random = "layout.random", 
-                                               fruchterman = "layout.fruchterman.reingold", 
+                                               fruchterman = "layout_nicely", 
                                                kamada = "layout.kamada.kawai", 
                                                lgl = "layout.lgl", 
                                                reingold = "layout.reingold.tilford", 
                                                grid = "layout.fruchterman.reingold.grid")}
-      
+
       igraph_visn <- toVisNetworkData(igraph)
       igraph_visn$edges$value <- E(igraph)$weight
       
@@ -1172,10 +1176,30 @@ loadNetworkFromFile <- function() {
               multiselect = TRUE,
               dragView = TRUE
             )
-        }
+      }
         
     })  # plot_layout
+
     
+    
+    
+    
+    # custom<- observeEvent(input$custom_network,{
+    #   igraph <- fetchFirstSelectedStoredIgraph()
+    #   
+    #   igraph_visn <- toVisNetworkData(igraph)
+    #   igraph_visn$edges$value <- E(igraph)$weight
+    #   
+    #   nodes <- igraph_visn$nodes
+    #   edges <- igraph_visn$edges
+    #   network <- visNetwork(nodes, edges)
+    #   shiny::callModule(visNetworkEditorServer, "id1", object = shiny::reactive(network))
+    # 
+    #   # output$custom_net<- 
+    # })
+    
+    
+    #---------------------------------------------------------------------------------------#
     observe({
         igraph <- fetchFirstSelectedStoredIgraph()
         shinyjs::toggleState("dwnld_layout", !is.null(igraph) && !is.null(reactiveVars$layoutCoord))
