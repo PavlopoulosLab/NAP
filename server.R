@@ -885,8 +885,7 @@ loadNetworkFromFile <- function() {
           data_i <- paste("data", i, sep = "")
           fig_i <- paste("fig", i, sep = "")
           data_i <- filter(stat_res, stat_res$statistic == stat_res$statistic[i])
-         
-          if(i==1:length(unique(data_i$network))){
+          if(length(unique(data_i$network)) == 1){
             fig_i<- plot_ly(x = data_i$statistic,
                             y = data_i$value,
                             name = data_i$network,
